@@ -1,64 +1,127 @@
+"""Creating are different geometry figures and getting their perimeter and area."""
+import math
+
+
 class GeometryFigure:
     """Class for geometry figure"""
-    _name = None
+    name = None
+    angles = None
+    perimeter = None
+    area = None
 
-    def __init__(self, name):
+    def __init__(self):
         """Class constructor for geometry figure"""
-        self.name = name
-        print(f'Geometry figure {name} was created!')
+        self.name = None
 
-    def __str__(self):
-        return self._name
-
-    def get_figure_name(self):
-        return f"{self.name}"
+    def add_area(self, other_figure):
+        """The sum of the areas different figures"""
+        if isinstance(other_figure, GeometryFigure):
+            print(self.area() + other_figure.area())
+        else:
+            print('Unknown class')
 
 
 class Triangle(GeometryFigure):
+    """Class for Triangle"""
 
-    def __init__(self, name, angles, side_1, side_2, side_3):
-        super().__init__(name)
+    def __init__(self, a, b):
+        """Constructor for Triangle creating"""
+        super().__init__()
+        self.a = a
+        self.b = b
+        self.name = 'Triangle'
         self.angles = 3
-        self.side_1 = side_1
-        self.side_2 = side_2
-        self.side_3 = side_3
 
-    def triangle_perimeter_calculation(self):
-        triangle_perimeter = self.side_1 + self.side_2 + self.side_3
-        return f'{self.get_figure_name()} perimeter with {self.angles} angles equals {str(triangle_perimeter)}'
+    def perimeter(self):
+        """Perimeter calculation"""
+        c = math.sqrt(self.a ** 2 + self.b ** 2)
+        perimeter = self.a + self.b + c
+        print(f'Perimeter {self.name} with {self.angles} angles is {int(perimeter)}')
+        return perimeter
 
-    @staticmethod
-    def triangle_area_calculation(side_1, height):
-        triangle_area = 1 / 2 * (side_1 * height)
-        return f'Triangle area equals {str(triangle_area)}'
+    def area(self):
+        """Area calculation"""
+        area = 1 / 2 * self.a * self.b
+        print(f'Area {self.name} with {self.angles} angles is {int(area)}')
+        return area
+
+
+class Square(GeometryFigure):
+    """Class for Square"""
+
+    def __init__(self, a):
+        """Constructor for Square creating"""
+        super().__init__()
+        self.name = 'Square'
+        self.angles = 4
+        self.a = a
+
+    def perimeter(self):
+        """Perimeter calculation"""
+        perimeter = 4 * self.a
+        print(f'Perimeter {self.name} with {self.angles} angles is {int(perimeter)}')
+        return perimeter
+
+    def area(self):
+        """Area calculation"""
+        area = self.a ** 2
+        print(f'Area {self.name} with {self.angles} angles is {int(area)}')
+        return area
 
 
 class Rectangle(GeometryFigure):
+    """Class for Rectangle"""
 
-    def __init__(self, name, angles, side_1, side_2):
-        super().__init__(name)
+    def __init__(self, a, b):
+        """Constructor for Rectangle creating"""
+        super().__init__()
+        self.name = 'Rectangle'
         self.angles = 4
-        self.side_1 = side_1
-        self.side_2 = side_2
+        self.a = a
+        self.b = b
+        if not a > b:
+            raise ValueError('Value "a" cannot be less than value "b" ')
 
-    def rectangle_perimeter_calculation(self):
-        retangle_perimeter = 2 * (self.side_1 + self.side_2)
-        return f'{self.get_figure_name()} perimeter with {self.angles} angles equals {str(retangle_perimeter)}'
+    def perimeter(self):
+        """Perimeter calculation"""
+        perimeter = 2 * self.a + 2 * self.b
+        print(f'Perimeter {self.name} with {self.angles} angles is {int(perimeter)}')
+        return perimeter
 
-    def rectangle_area_calculation(self):
-        rectangle_area = self.side_1 * self.side_2
-        return f'{self.get_figure_name()} area with {self.angles} angles equals {str(rectangle_area)}'
+    def area(self):
+        """Area calculation"""
+        area = self.a * self.b
+        print(f'Area {self.name} with {self.angles} angles is {int(area)}')
+        return area
 
 
-class Quadrate(GeometryFigure, Rectangle):
-    pass
+class Circle(GeometryFigure):
+    """Class for Circle"""
+
+    def __init__(self, radius):
+        """Constructor for Circle creating"""
+        super().__init__()
+        self.name = 'Circle'
+        self.angles = None
+        self.radius = radius
+
+    def perimeter(self):
+        """Perimeter calculation"""
+        perimeter = self.radius * 2 * math.pi
+        print(f'Perimeter {self.name} with {self.angles} angles is {int(perimeter)}')
+        return perimeter
+
+    def area(self):
+        """Area calculation"""
+        area = self.radius ** 2 * math.pi
+        print(f'Area {self.name} is {int(area)}')
+        return area
 
 
-if __name__ == '__main__':
-    # triangle = Triangle(name='Triangle', angles=3, side_1=10, side_2=12, side_3=10)
-    # print(Triangle.triangle_area_calculation(10, 5))
-    # print(triangle.triangle_perimeter_calculation())
+if __name__ == "__main__":
+    triangle = Triangle(a=5, b=6)
+    square = Square(a=4)
+    rectangle = Rectangle(a=6, b=3)
+    circle = Circle(radius=1.5)
 
-    rectangle = Rectangle(name='Rectangle', angles=4, side_1=10, side_2=20)
-    print(rectangle.rectangle_perimeter_calculation())
-    print(rectangle.rectangle_area_calculation())
+    triangle.add_area(circle)
