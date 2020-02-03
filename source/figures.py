@@ -15,6 +15,7 @@ class GeometryFigure:
         self.angles = angles
 
     def get_name_and_angles(self):
+        """Getting figure name and angles count"""
         if self.angles > 0:
             return f'{self.name} with {self.angles} angles'
         else:
@@ -37,6 +38,7 @@ class Triangle(GeometryFigure):
         super().__init__(name='Triangle', angles=3)
         self.a = a
         self.b = b
+        print(f'{self.get_name_and_angles()} was created!')
 
     def perimeter(self):
         """Perimeter calculation"""
@@ -59,6 +61,7 @@ class Square(GeometryFigure):
         """Constructor for Square creating"""
         super().__init__(name='Square', angles=4)
         self.a = a
+        print(f'{self.get_name_and_angles()} was created!')
 
     def perimeter(self):
         """Perimeter calculation"""
@@ -83,6 +86,7 @@ class Rectangle(GeometryFigure):
         self.b = b
         if a == b:
             raise ValueError('One side figure should be more than other side')
+        print(f'{self.get_name_and_angles()} was created!')
 
     def perimeter(self):
         """Perimeter calculation"""
@@ -104,6 +108,7 @@ class Circle(GeometryFigure):
         """Constructor for Circle creating"""
         super().__init__(name='Circle', angles=0)
         self.radius = radius
+        print(f'{self.get_name_and_angles()} was created!')
 
     def perimeter(self):
         """Perimeter calculation"""
@@ -123,3 +128,5 @@ if __name__ == "__main__":
     square = Square(a=4)
     rectangle = Rectangle(a=6, b=3)
     circle = Circle(radius=1.5)
+
+    triangle.area()
