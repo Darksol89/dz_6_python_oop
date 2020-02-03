@@ -81,8 +81,8 @@ class Rectangle(GeometryFigure):
         super().__init__(name='Rectangle', angles=4)
         self.a = a
         self.b = b
-        if not a > b:
-            raise ValueError('Value "a" cannot be less than value "b" ')
+        if a == b:
+            raise ValueError('One side figure should be more than other side')
 
     def perimeter(self):
         """Perimeter calculation"""
@@ -123,9 +123,3 @@ if __name__ == "__main__":
     square = Square(a=4)
     rectangle = Rectangle(a=6, b=3)
     circle = Circle(radius=1.5)
-    tesd = 10
-
-    triangle.area()
-    circle.perimeter()
-    circle.area()
-    #triangle.add_area(triangle)
